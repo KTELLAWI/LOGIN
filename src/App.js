@@ -1,26 +1,26 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Header from './Header';
+import Form from './Form';
+import authprovider, { Authcontext } from './Authcontetxt';
+import {Authprovider} from './Authcontetxt'
 function App() {
+  const authcontext  = useContext(Authcontext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className= "container">
+
+    <Header />
+    {authcontext.auth.email? "welcome "  : <Form />}
     </div>
   );
 }
 
-export default App;
+function Appwithstore(){
+  return(
+  <Authprovider>
+    <App />
+  </Authprovider>
+  );
+}
+export default Appwithstore;
